@@ -7,7 +7,7 @@
 # MAGIC [sciencebase.gov/catalog/item/67004442d34e80be174aea95](https://www.sciencebase.gov/catalog/item/67004442d34e80be174aea95).
 # MAGIC
 # MAGIC Turns the bronze landings into a single analytics-ready table per
-# MAGIC sensor stream (all under `shm.ml` with a `gordaridge_` prefix):
+# MAGIC sensor stream (all under `cjc.ml` with a `gordaridge_` prefix):
 # MAGIC
 # MAGIC | Silver table              | Built from                                                                |
 # MAGIC | ------------------------- | ------------------------------------------------------------------------- |
@@ -25,7 +25,7 @@
 
 from pyspark.sql import functions as F
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 PREFIX = "gordaridge_"
 

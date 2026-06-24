@@ -29,9 +29,9 @@
 # MAGIC where postprocessing runs differ.
 # MAGIC
 # MAGIC Outputs:
-# MAGIC - `shm.ml.spark_vs_ray_docs`           — input (10k pubmed_qa rows)
-# MAGIC - `shm.ml.spark_vs_ray_spark_results`  — Spark job output
-# MAGIC - `shm.ml.spark_vs_ray_ray_results`    — Ray job output
+# MAGIC - `cjc.ml.spark_vs_ray_docs`           — input (10k pubmed_qa rows)
+# MAGIC - `cjc.ml.spark_vs_ray_spark_results`  — Spark job output
+# MAGIC - `cjc.ml.spark_vs_ray_ray_results`    — Ray job output
 
 # COMMAND ----------
 
@@ -47,7 +47,7 @@ dbutils.library.restartPython()
 
 # COMMAND ----------
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 PREFIX = "spark_vs_ray_"
 VARIANT = "optimized"  # distinguishes outputs from the base notebook

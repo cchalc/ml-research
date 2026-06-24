@@ -6,7 +6,7 @@
 # MAGIC Pulls the Escanaba Trough sediment-core dataset from USGS ScienceBase
 # MAGIC ([doi:10.5066/P13B46QX](https://doi.org/10.5066/P13B46QX),
 # MAGIC [data release page](https://www.sciencebase.gov/catalog/item/67004442d34e80be174aea95))
-# MAGIC into the `shm.ml` schema with a `gordaridge_` table prefix.
+# MAGIC into the `cjc.ml` schema with a `gordaridge_` table prefix.
 # MAGIC
 # MAGIC We keep four child items (the rest of the release is media zips or
 # MAGIC narrow analytical products):
@@ -34,7 +34,7 @@ from pathlib import Path
 from pyspark.sql import functions as F
 from pyspark.sql.types import DoubleType
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 PREFIX = "gordaridge_"
 VOLUME = "gordaridge_raw"

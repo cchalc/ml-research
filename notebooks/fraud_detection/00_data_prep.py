@@ -3,7 +3,7 @@
 # MAGIC %md
 # MAGIC # Fraud Detection — Data Preparation
 # MAGIC Generates a synthetic credit-card transaction dataset with engineered features
-# MAGIC and a `is_fraud` label, then writes it to `shm.ml.fraud_transactions`.
+# MAGIC and a `is_fraud` label, then writes it to `cjc.ml.fraud_transactions`.
 # MAGIC
 # MAGIC This is the **data** stage of the demo:
 # MAGIC `data → training → experimentation → registry → serving → inference`.
@@ -18,7 +18,7 @@
 import numpy as np
 import pandas as pd
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 TABLE = f"{CATALOG}.{SCHEMA}.fraud_transactions"
 

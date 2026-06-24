@@ -17,7 +17,7 @@
 # MAGIC on the Spark side and defers per-doc unpacking off the GPU actor on
 # MAGIC the Ray side.
 # MAGIC
-# MAGIC Outputs land in `shm.ml.spark_vs_ray_docs`, `_spark_results`, and
+# MAGIC Outputs land in `cjc.ml.spark_vs_ray_docs`, `_spark_results`, and
 # MAGIC `_ray_results`.
 
 # COMMAND ----------
@@ -34,7 +34,7 @@ dbutils.library.restartPython()
 
 # COMMAND ----------
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 PREFIX = "spark_vs_ray_"
 VARIANT = "base"  # distinguishes outputs from the optimized notebook

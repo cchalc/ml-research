@@ -19,7 +19,7 @@ from databricks.sdk.service.serving import (
 from mlflow.tracking import MlflowClient
 import mlflow
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 UC_MODEL_NAME = f"{CATALOG}.{SCHEMA}.fraud_xgboost"
 ENDPOINT_NAME = "fraud_detection_demo"

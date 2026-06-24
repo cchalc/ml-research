@@ -1,3 +1,3 @@
 parts:
   type: MemoryDataset
-  filepath: shm.iot_turbine.parts
+  filepath: cjc.iot_turbine.parts

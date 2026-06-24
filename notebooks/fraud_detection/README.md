@@ -14,15 +14,15 @@ so it runs anywhere with zero setup.
 
 | Notebook | Stage | What it does |
 |---|---|---|
-| `00_data_prep.py` | **Data** | Generates 250K synthetic card transactions with realistic features (amount-vs-normal-spend, distance from home, velocity, merchant risk, foreign/card-present flags) and a `is_fraud` label. Writes `shm.ml.fraud_transactions`. |
-| `01_train_xgboost.py` | **Training + Experimentation + Registry** | Runs **3 MLflow experiments** (baseline, tuned, tuned+regularized XGBoost), compares them on **PR-AUC**, then wraps the best booster in a `FraudScorer` pyfunc that returns a fraud probability and registers it to Unity Catalog as `shm.ml.fraud_xgboost@champion`. |
-| `02_batch_inference.py` | **Inference (batch)** | Loads the champion as a Spark UDF and scores the whole table in parallel → `shm.ml.fraud_scored_batch`. |
+| `00_data_prep.py` | **Data** | Generates 250K synthetic card transactions with realistic features (amount-vs-normal-spend, distance from home, velocity, merchant risk, foreign/card-present flags) and a `is_fraud` label. Writes `cjc.ml.fraud_transactions`. |
+| `01_train_xgboost.py` | **Training + Experimentation + Registry** | Runs **3 MLflow experiments** (baseline, tuned, tuned+regularized XGBoost), compares them on **PR-AUC**, then wraps the best booster in a `FraudScorer` pyfunc that returns a fraud probability and registers it to Unity Catalog as `cjc.ml.fraud_xgboost@champion`. |
+| `02_batch_inference.py` | **Inference (batch)** | Loads the champion as a Spark UDF and scores the whole table in parallel → `cjc.ml.fraud_scored_batch`. |
 | `03_model_serving.py` | **Serving (real-time)** | Deploys the champion to a serverless **Model Serving** endpoint (`fraud_detection_demo`) and queries it over REST. |
-| `04_streaming_inference.py` | **Inference (streaming)** | Uses Spark's `rate` source as a **live** transaction generator (~2/sec), scores each one with the same model, and streams alerts into `shm.ml.fraud_scored_stream`. |
+| `04_streaming_inference.py` | **Inference (streaming)** | Uses Spark's `rate` source as a **live** transaction generator (~2/sec), scores each one with the same model, and streams alerts into `cjc.ml.fraud_scored_stream`. |
 | `05_monitoring.py` | **Monitoring** | Attaches a Unity Catalog **Lakehouse Monitor** to the scored stream — auto-profiles score/alert-rate metrics and tracks drift over time, with a generated dashboard. |
 
 One model, three inference patterns (batch, real-time REST, streaming) — all loading the
-same `models:/shm.ml.fraud_xgboost@champion` URI.
+same `models:/cjc.ml.fraud_xgboost@champion` URI.
 
 ### Verified live (run on Azure workspace `adb-984752964297111`)
 
@@ -64,9 +64,9 @@ databricks bundle run fraud_detection_streaming -t dev
 
 All notebooks share these constants (edit at the top of each):
 
-- Catalog / schema: `shm.ml`
+- Catalog / schema: `cjc.ml`
 - Experiment: `/Shared/fraud_detection`
-- UC model: `shm.ml.fraud_xgboost` (alias `@champion`)
+- UC model: `cjc.ml.fraud_xgboost` (alias `@champion`)
 - Serving endpoint: `fraud_detection_demo`
 
 ## Cleanup
@@ -79,5 +79,5 @@ from databricks.sdk import WorkspaceClient
 w = WorkspaceClient()
 w.serving_endpoints.delete(name="fraud_detection_demo")
 # Delete the monitor
-w.quality_monitors.delete(table_name="shm.ml.fraud_scored_stream")
+w.quality_monitors.delete(table_name="cjc.ml.fraud_scored_stream")
 ```

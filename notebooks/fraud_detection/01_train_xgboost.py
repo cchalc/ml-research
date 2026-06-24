@@ -8,7 +8,7 @@
 # MAGIC # Fraud Detection — Training & Experimentation with MLflow + XGBoost
 # MAGIC This is the **training → experimentation → registry** stage.
 # MAGIC
-# MAGIC We run **three MLflow experiments** against `shm.ml.fraud_transactions`:
+# MAGIC We run **three MLflow experiments** against `cjc.ml.fraud_transactions`:
 # MAGIC 1. `baseline` — shallow XGBoost, no class weighting
 # MAGIC 2. `tuned` — deeper trees, more rounds, `scale_pos_weight` for the class imbalance
 # MAGIC 3. `tuned_regularized` — adds L1/L2 regularization and subsampling
@@ -16,7 +16,7 @@
 # MAGIC All runs log to the same experiment so they're directly comparable in the MLflow
 # MAGIC UI. We pick the best run by validation **PR-AUC** (the right metric for rare-event
 # MAGIC fraud), wrap its booster in a `FraudScorer` pyfunc that returns a calibrated
-# MAGIC **fraud probability**, and register it to Unity Catalog as `shm.ml.fraud_xgboost`
+# MAGIC **fraud probability**, and register it to Unity Catalog as `cjc.ml.fraud_xgboost`
 # MAGIC with a `champion` alias.
 # MAGIC
 
@@ -29,7 +29,7 @@
 
 # COMMAND ----------
 
-# MAGIC %uv pip install /Volumes/shm/ml/whl/mlflow_lens-0.2.0-py3-none-any.whl
+# MAGIC %uv pip install /Volumes/cjc/ml/whl/mlflow_lens-0.2.0-py3-none-any.whl
 # MAGIC %restart_python
 
 # COMMAND ----------
@@ -43,7 +43,7 @@ from mlflow.tracking import MlflowClient
 from mlflow_lens.classifier import roc_auc, confusion_matrix
 from sklearn.metrics import roc_auc_score, average_precision_score, f1_score, precision_score, recall_score
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 SOURCE_TABLE = f"{CATALOG}.{SCHEMA}.fraud_transactions"
 UC_MODEL_NAME = f"{CATALOG}.{SCHEMA}.fraud_xgboost"
@@ -227,7 +227,7 @@ with mlflow.start_run(run_name=f"register_{best_name}"):
 
 # MAGIC %md
 # MAGIC ## Promote to the `champion` alias
-# MAGIC Downstream notebooks load `models:/shm.ml.fraud_xgboost@champion`, so promoting a
+# MAGIC Downstream notebooks load `models:/cjc.ml.fraud_xgboost@champion`, so promoting a
 # MAGIC new version is a one-line change with no edits to the consumers.
 
 # COMMAND ----------

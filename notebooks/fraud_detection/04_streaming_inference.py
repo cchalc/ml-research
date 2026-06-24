@@ -7,7 +7,7 @@
 # MAGIC # Fraud Detection — Structured Streaming Inference (Live Data)
 # MAGIC The third **inference** pattern, and the headline of the demo: scoring a stream
 # MAGIC of transactions with the champion model and writing alerts to
-# MAGIC `shm.ml.fraud_scored_stream`.
+# MAGIC `cjc.ml.fraud_scored_stream`.
 # MAGIC
 # MAGIC Two run modes, controlled by `STREAM_MODE`:
 # MAGIC
@@ -29,7 +29,7 @@
 import mlflow
 from pyspark.sql import functions as F
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 UC_MODEL_NAME = f"{CATALOG}.{SCHEMA}.fraud_xgboost"
 MODEL_URI = f"models:/{UC_MODEL_NAME}@champion"

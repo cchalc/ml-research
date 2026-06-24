@@ -3,7 +3,7 @@
 # MAGIC %md
 # MAGIC # Fraud Detection — Monitoring with Lakehouse Monitoring
 # MAGIC The **monitoring** stage that closes the loop. We attach a Unity Catalog
-# MAGIC **Lakehouse Monitor** to the live scored stream `shm.ml.fraud_scored_stream`.
+# MAGIC **Lakehouse Monitor** to the live scored stream `cjc.ml.fraud_scored_stream`.
 # MAGIC
 # MAGIC Lakehouse Monitoring automatically profiles the table on every refresh and tracks
 # MAGIC how those profiles **drift over time** — exactly what a bank needs to know its
@@ -23,7 +23,7 @@ from databricks.sdk.service.catalog import MonitorSnapshot
 
 w = WorkspaceClient()
 
-CATALOG, SCHEMA = "shm", "ml"
+CATALOG, SCHEMA = "cjc", "ml"
 TABLE = f"{CATALOG}.{SCHEMA}.fraud_scored_stream"
 OUTPUT_SCHEMA = f"{CATALOG}.{SCHEMA}"
 ASSETS_DIR = "/Workspace/Users/scott.mckean@databricks.com/fraud_detection_demo/monitor_assets"

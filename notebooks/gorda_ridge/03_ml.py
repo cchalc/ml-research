@@ -32,7 +32,7 @@ from sklearn.metrics import (
 )
 from sklearn.preprocessing import StandardScaler
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 PREFIX = "gordaridge_"
 XRF_ELEMENTS = ("Mn", "Fe", "Cu", "Pb", "S", "Ca")

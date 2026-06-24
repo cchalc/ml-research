@@ -28,7 +28,7 @@ def mem_gb():
 mem_start = mem_gb()
 start_load = time.time()
 
-df = spark.read.table("shm.ml.movielens_features")
+df = spark.read.table("cjc.ml.movielens_features")
 feature_cols = [c for c in df.columns if c not in ("userId", "movieId", "rating")]
 target_col = "rating"
 
@@ -99,9 +99,9 @@ with mlflow.start_run(run_name="xgboost_python"):
         artifact_path="model",
         signature=signature,
         input_example=X_test[:5],
-        registered_model_name="shm.ml.movielens_xgboost_python",
+        registered_model_name="cjc.ml.movielens_xgboost_python",
     )
 
     print(f"Train: {train_time:.1f}s | RMSE: {rmse:.4f} | MAE: {mae:.4f}")
     print(f"Peak driver memory: {max(mem_after_load, mem_after_dmatrix, mem_after_train):.1f} GB")
-    print(f"Model registered to shm.ml.movielens_xgboost_python")
+    print(f"Model registered to cjc.ml.movielens_xgboost_python")

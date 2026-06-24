@@ -4,7 +4,7 @@
 # MAGIC # Fraud Detection — Batch Inference
 # MAGIC The first of three **inference** patterns. We load the registered champion model
 # MAGIC as a Spark UDF and score a full table of transactions in parallel, writing the
-# MAGIC results to `shm.ml.fraud_scored_batch`.
+# MAGIC results to `cjc.ml.fraud_scored_batch`.
 # MAGIC
 # MAGIC This is how you'd nightly-score a day's worth of settled transactions, or
 # MAGIC backfill scores for an analytics dashboard.
@@ -14,7 +14,7 @@
 import mlflow
 from pyspark.sql import functions as F
 
-CATALOG = "shm"
+CATALOG = "cjc"
 SCHEMA = "ml"
 SOURCE_TABLE = f"{CATALOG}.{SCHEMA}.fraud_transactions"
 SCORED_TABLE = f"{CATALOG}.{SCHEMA}.fraud_scored_batch"

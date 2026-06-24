@@ -77,7 +77,7 @@ print(f"Ray cluster resources: {ray.cluster_resources()}")
 start_load = time.time()
 print("Reading feature table from Delta...")
 
-df = spark.read.table("shm.ml.movielens_features")
+df = spark.read.table("cjc.ml.movielens_features")
 feature_cols = [c for c in df.columns if c not in ("userId", "movieId", "rating")]
 target_col = "rating"
 
@@ -187,9 +187,9 @@ with mlflow.start_run(run_name="xgboost_ray"):
             artifact_path="model",
             signature=signature,
             input_example=test_sample,
-            registered_model_name="shm.ml.movielens_xgboost_ray",
+            registered_model_name="cjc.ml.movielens_xgboost_ray",
         )
-        print("Model registered to shm.ml.movielens_xgboost_ray")
+        print("Model registered to cjc.ml.movielens_xgboost_ray")
 
     print(f"Train time: {train_time:.1f}s")
     print(f"Result metrics: {metrics}")

@@ -3,7 +3,7 @@
 # MAGIC %md
 # MAGIC # MovieLens 25M Data Preparation
 # MAGIC Downloads the MovieLens 25M dataset (25M ratings, 62K movies, 162K users),
-# MAGIC engineers features for rating prediction, and writes to `shm.ml.movielens_features`.
+# MAGIC engineers features for rating prediction, and writes to `cjc.ml.movielens_features`.
 
 # COMMAND ----------
 
@@ -110,11 +110,11 @@ features_df.printSchema()
 
 # COMMAND ----------
 
-spark.sql("CREATE SCHEMA IF NOT EXISTS shm.ml")
-features_df.write.mode("overwrite").saveAsTable("shm.ml.movielens_features")
+spark.sql("CREATE SCHEMA IF NOT EXISTS cjc.ml")
+features_df.write.mode("overwrite").saveAsTable("cjc.ml.movielens_features")
 
 ratings_df.unpersist()
 movies_df.unpersist()
 
-row_count = spark.read.table("shm.ml.movielens_features").count()
-print(f"Written {row_count:,} rows to shm.ml.movielens_features")
+row_count = spark.read.table("cjc.ml.movielens_features").count()
+print(f"Written {row_count:,} rows to cjc.ml.movielens_features")
